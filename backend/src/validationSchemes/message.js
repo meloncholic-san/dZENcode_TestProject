@@ -6,4 +6,6 @@ export const createMessageSchema = Joi.object({
   fileUrl: Joi.string().uri().allow(null),
   fileType: Joi.string().valid('image', 'text').allow(null),
   parentId: Joi.number().integer().allow(null),
+  name: Joi.string().min(1).required(), 
+  email: Joi.string().email().required(),
 });

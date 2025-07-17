@@ -13,7 +13,7 @@ export async function optionalAuth(req, res, next) {
         const decoded = jwt.verify(token, getEnvVar("JWT_SECRET"));
         const user = await User.findByPk(decoded.sub);
         if (user) {
-          req.user = { id: user.id, name: user.name };
+          req.user = { id: user.id };
         }
       }
     } else {
@@ -23,7 +23,7 @@ export async function optionalAuth(req, res, next) {
         if (session && session.accessTokenValidUntil > new Date()) {
           const user = await User.findByPk(session.userId);
           if (user) {
-            req.user = { id: user.id, name: user.name };
+            req.user = { id: user.id};
           }
         }
       }

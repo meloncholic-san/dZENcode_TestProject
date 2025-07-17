@@ -24,16 +24,22 @@ export const Message = sequelize.define('Message', {
     allowNull: true,
   },
   userId: {
-  type: DataTypes.INTEGER,
-  allowNull: true,
-  // references: {
-  //   model: 'Users',
-  //   key: 'id',
-  // },
-},
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+  name: {                       
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  email: {                     
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: { isEmail: true },
+  },
 }, {
   timestamps: true,
 });
+
 
 Message.prototype.countLikes = async function () {
   return await this.countReactions({ where: { type: 'like' } });

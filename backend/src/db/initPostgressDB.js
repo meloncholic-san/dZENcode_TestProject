@@ -6,8 +6,8 @@ export const initPostgres = async () => {
   try {
     await sequelize.authenticate();
     console.log('✅ Connected to PostgreSQL');
-    await sequelize.sync()
-
+    // await sequelize.sync({ alter: true });
+    await sequelize.sync();
     console.log('✅ DB synced');
   } catch (error) {
     console.error('❌ Failed to connect or sync DB', error);

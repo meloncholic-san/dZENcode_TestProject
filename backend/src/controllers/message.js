@@ -7,7 +7,8 @@ import { getEnvVar } from '../utils/getEnvVar.js';
 
 export const createMessageCtrl = async (req, res, next) => {
   try {
-    const { text, homepage, parentId } = req.body;
+    const { text, homepage, parentId, name, email } = req.body;
+
 
     if (!text && !req.file) {
       throw new createHttpError.BadRequest('Message must have text or a file');
@@ -43,6 +44,8 @@ export const createMessageCtrl = async (req, res, next) => {
       fileType,
       parentId,
       userId,
+      name,
+      email,
     });
 
     res.status(201).json({ status: 201, message: 'Message created', data: message });
