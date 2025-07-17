@@ -6,7 +6,7 @@ import path from 'node:path';
 import cookieParser from 'cookie-parser';
 import { getEnvVar } from './utils/getEnvVar.js';
 import { errorHandler } from './middlewares/errorHandler.js';
-
+import { notFoundHandler } from './middlewares/notFoundHandler.js';
 
 
 
