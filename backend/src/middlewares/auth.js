@@ -2,7 +2,7 @@ import createHttpError from 'http-errors';
 import jwt from 'jsonwebtoken';
 import { getEnvVar } from '../utils/getEnvVar.js';
 import { Session } from '../db/models/Session.js';
-import { User } from '../db/models/user.js';
+import { User } from '../db/models/User.js';
 
 export async function auth(req, res, next) {
   if (getEnvVar('JWT_AUTHENTICATION')) {

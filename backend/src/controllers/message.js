@@ -35,14 +35,14 @@ export const createMessageCtrl = async (req, res, next) => {
         fileUrl = `http://localhost:8080/uploads/messages/${req.file.filename}`;
       }
     }
-
+    const userId = req.user?.id || null;
     const message = await createMessage({
       text,
       homepage,
       fileUrl,
       fileType,
       parentId,
-      userId: req.user.id,
+      userId,
     });
 
     res.status(201).json({ status: 201, message: 'Message created', data: message });

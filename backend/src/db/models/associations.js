@@ -1,4 +1,4 @@
-import { User } from './user.js';
+import { User } from './User.js';
 import { Session } from './Session.js';
 import { Message } from './Message.js';
 import { Reaction } from './Reaction.js';

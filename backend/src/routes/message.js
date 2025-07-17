@@ -6,9 +6,10 @@ import { validateUploadedFile } from '../middlewares/validateUploadedFile.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import { createMessageSchema } from '../validationSchemes/message.js';
+import { optionalAuth } from '../middlewares/optionalAuth.js';
 const router = express.Router();
 
 router.get('/', ctrlWrapper(getMessagesCtrl));
-router.post('/', auth, upload.single('file'), validateUploadedFile, validateBody(createMessageSchema), ctrlWrapper(createMessageCtrl));
+router.post('/', optionalAuth, upload.single('file'), validateUploadedFile, validateBody(createMessageSchema), ctrlWrapper(createMessageCtrl));
 
 export default router;

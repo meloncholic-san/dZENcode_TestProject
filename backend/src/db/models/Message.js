@@ -23,6 +23,14 @@ export const Message = sequelize.define('Message', {
     type: DataTypes.INTEGER,
     allowNull: true,
   },
+  userId: {
+  type: DataTypes.INTEGER,
+  allowNull: true,
+  // references: {
+  //   model: 'Users',
+  //   key: 'id',
+  // },
+},
 }, {
   timestamps: true,
 });
