@@ -4,6 +4,8 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { uploadToCloudinary } from '../utils/uploadToClaudinary.js';
 import { getEnvVar } from '../utils/getEnvVar.js';
+import { getWSS } from '../server.js';
+
 
 export const createMessageCtrl = async (req, res, next) => {
   try {
@@ -49,6 +51,17 @@ export const createMessageCtrl = async (req, res, next) => {
     });
 
     res.status(201).json({ status: 201, message: 'Message created', data: message });
+
+    const wss = getWSS();
+    if (wss) {
+      const dataToSend = JSON.stringify({ type: 'new_comment', payload: message });
+      wss.clients.forEach(client => {
+        if (client.readyState === WebSocket.OPEN) {
+          client.send(dataToSend);
+        }
+      });
+    }
+
   } catch (error) {
     next(error);
   }

@@ -8,4 +8,6 @@ export const createMessageSchema = Joi.object({
   parentId: Joi.number().integer().allow(null),
   name: Joi.string().min(1).required(), 
   email: Joi.string().email().required(),
+  captchaCode: Joi.string().required(),
+  captchaToken: Joi.string().required(),
 });

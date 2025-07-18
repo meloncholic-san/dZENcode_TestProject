@@ -17,7 +17,7 @@ function initAssociations({ User, Session, Message, Reaction }) {
   Message.hasMany(Message, { foreignKey: 'parentId', as: 'replies' });
   Message.belongsTo(Message, { foreignKey: 'parentId', as: 'parent' });
 
-  // Reaction <-> User/Message
+  // Reaction <-> User/Message TODO
   Reaction.belongsTo(User, { foreignKey: 'userId' });
   Reaction.belongsTo(Message, { foreignKey: 'messageId' });
 

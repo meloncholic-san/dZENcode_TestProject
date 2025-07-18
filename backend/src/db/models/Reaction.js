@@ -15,3 +15,4 @@ export const Reaction = sequelize.define('Reaction', {
     }
   ]
 });
+//TODO

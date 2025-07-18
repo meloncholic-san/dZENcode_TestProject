@@ -25,18 +25,28 @@ export const createMessage = async ({
 };
 
 
+// export const getAllMessages = async () => {
+//   return await Message.findAll({
+//     where: { parentId: null },
+//     include: [
+//       {
+//         model: Message,
+//         as: 'replies',
+//         include: [
+//           { model: User, as: 'author', attributes: ['name', 'avatarUrl'] },
+//           { model: Reaction, as: 'reactions' },
+//         ],
+//       },
+//       { model: User, as: 'author', attributes: ['name', 'avatarUrl'] },
+//       { model: Reaction, as: 'reactions' },
+//     ],
+//     order: [['createdAt', 'DESC']],
+//   });
+// };
+
 export const getAllMessages = async () => {
   return await Message.findAll({
-    where: { parentId: null },
     include: [
-      {
-        model: Message,
-        as: 'replies',
-        include: [
-          { model: User, as: 'author', attributes: ['name', 'avatarUrl'] },
-          { model: Reaction, as: 'reactions' },
-        ],
-      },
       { model: User, as: 'author', attributes: ['name', 'avatarUrl'] },
       { model: Reaction, as: 'reactions' },
     ],

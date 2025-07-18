@@ -7,9 +7,12 @@ import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import { createMessageSchema } from '../validationSchemes/message.js';
 import { optionalAuth } from '../middlewares/optionalAuth.js';
+import { verifyCaptcha } from '../middlewares/verifyCaptcha.js';
 const router = express.Router();
+const jsonParser = express.json();
+
 
 router.get('/', ctrlWrapper(getMessagesCtrl));
-router.post('/', optionalAuth, upload.single('file'), validateUploadedFile, validateBody(createMessageSchema), ctrlWrapper(createMessageCtrl));
+router.post('/', optionalAuth, upload.single('file'), jsonParser, validateUploadedFile, verifyCaptcha, validateBody(createMessageSchema), ctrlWrapper(createMessageCtrl));
 
 export default router;
