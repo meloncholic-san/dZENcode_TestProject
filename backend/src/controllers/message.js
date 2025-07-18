@@ -5,7 +5,7 @@ import path from 'node:path';
 import { uploadToCloudinary } from '../utils/uploadToClaudinary.js';
 import { getEnvVar } from '../utils/getEnvVar.js';
 import { getWSS } from '../server.js';
-
+import {redisClient} from '../redisClient.js'
 
 export const createMessageCtrl = async (req, res, next) => {
   try {
@@ -50,6 +50,8 @@ export const createMessageCtrl = async (req, res, next) => {
       email,
     });
 
+    await redisClient.del('all_messages');
+    console.log('🗑️ Redis cache invalidated');
     res.status(201).json({ status: 201, message: 'Message created', data: message });
 
     const wss = getWSS();
@@ -67,10 +69,27 @@ export const createMessageCtrl = async (req, res, next) => {
   }
 };
 
+
+
+
+
+
+
 export const getMessagesCtrl = async (req, res, next) => {
   try {
+    const cacheKey = 'all_messages';
+    const cachedData = await redisClient.get(cacheKey);
+    console.log('📦 Redis cache hit:', !!cachedData);
+    if (cachedData) {
+      const messages = JSON.parse(cachedData);
+      return res.status(200).json({ status: 200, data: messages, cached: true });
+    }
+
     const messages = await getAllMessages();
-    res.status(200).json({ status: 200, data: messages });
+
+    await redisClient.setEx(cacheKey, 60, JSON.stringify(messages));
+
+    res.status(200).json({ status: 200, data: messages, cached: false });
   } catch (error) {
     next(error);
   }

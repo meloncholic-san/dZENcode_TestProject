@@ -1,47 +1,4 @@
-// import { useEffect, useState } from 'react';
-// import { api } from '../../redux/index.js'
 
-// export function Captcha({ onChange }) {
-//   const [captchaToken, setCaptchaToken] = useState('');
-//   const [captchaSvg, setCaptchaSvg] = useState('');
-
-//   const fetchCaptcha = async () => {
-//     try {
-//       const res = await api.get('/api/captcha');
-//       setCaptchaSvg(res.data.svg);
-//       setCaptchaToken(res.data.captchaToken);
-//       onChange(res.data.captchaToken, '');
-//     } catch (error) {
-//       console.error('CAPTCHA fetch error', error);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchCaptcha();
-//   }, []);
-
-//   return (
-//     <div>
-//       {captchaSvg ? (
-//         <div
-//           onClick={fetchCaptcha}
-//           style={{ cursor: 'pointer' }}
-//           dangerouslySetInnerHTML={{ __html: captchaSvg }}
-//         />
-//       ) : (
-//         <p>Loading CAPTCHA...</p>
-//       )}
-
-//       <input
-//         type="text"
-//         placeholder="Enter CAPTCHA"
-//         onChange={(e) => onChange(captchaToken, e.target.value)}
-//         required
-//       />
-//       <p>Click CAPTCHA to refresh</p>
-//     </div>
-//   );
-// }
 
 import { useEffect, useState } from 'react';
 import { api } from '../../redux/index.js'
