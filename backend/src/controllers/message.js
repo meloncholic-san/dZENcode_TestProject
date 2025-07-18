@@ -6,6 +6,8 @@ import { uploadToCloudinary } from '../utils/uploadToClaudinary.js';
 import { getEnvVar } from '../utils/getEnvVar.js';
 import { getWSS } from '../server.js';
 import {redisClient} from '../redisClient.js'
+import { Message } from '../db/models/Message.js';
+import { User } from '../db/models/User.js';
 
 export const createMessageCtrl = async (req, res, next) => {
   try {
@@ -50,13 +52,27 @@ export const createMessageCtrl = async (req, res, next) => {
       email,
     });
 
+    const fullMessage = await Message.findOne({
+      where: { id: message.id },
+      include: [
+        { model: User, as: 'author', attributes: ['name', 'avatarUrl'] },
+      ],
+    });
+      
+    if (!fullMessage.author && message.name) {
+      fullMessage.author = {
+        name: message.name,
+        email: message.email,
+      };
+    }
+
     await redisClient.del('all_messages');
     console.log('🗑️ Redis cache invalidated');
-    res.status(201).json({ status: 201, message: 'Message created', data: message });
+    res.status(201).json({ status: 201, message: 'Message created', data: fullMessage });
 
     const wss = getWSS();
     if (wss) {
-      const dataToSend = JSON.stringify({ type: 'new_comment', payload: message });
+      const dataToSend = JSON.stringify({ type: 'new_comment', payload: fullMessage });
       wss.clients.forEach(client => {
         if (client.readyState === WebSocket.OPEN) {
           client.send(dataToSend);
@@ -68,10 +84,6 @@ export const createMessageCtrl = async (req, res, next) => {
     next(error);
   }
 };
-
-
-
-
 
 
 
@@ -94,3 +106,4 @@ export const getMessagesCtrl = async (req, res, next) => {
     next(error);
   }
 };
+
