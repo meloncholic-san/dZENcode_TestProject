@@ -1,0 +1,39 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th {
+  cursor: pointer;
+  background-color: #f0f0f0;
+  padding: 10px;
+  width: 33%;
+}
+td {
+  padding: 10px;
+  vertical-align: top;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.active {
+  font-weight: bold;
+  border-bottom: 2px solid #007bff;
+}
+
+.arrow {
+  display: inline-block;
+  width: 5px;
+  text-align: center;
+  color: #333;
+  opacity: 0.6;
+}
+
+.header {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

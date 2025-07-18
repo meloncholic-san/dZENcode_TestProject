@@ -1,0 +1,79 @@
+.header {
+  background-color: #3d2218;
+  color: white;
+  padding: 16px 0;
+  z-index: 9999;
+}
+
+.inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: white;
+}
+
+.logo img {
+  width: 36px;
+  height: auto;
+}
+
+.logoText {
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+/* User Block */
+.userBlock {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.welcomeText {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #fff;
+}
+
+.avatar {
+  background-color: #9b6c43;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.userName {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.logoutBtn,
+.authBtn {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.logoutBtn:hover,
+.authBtn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}

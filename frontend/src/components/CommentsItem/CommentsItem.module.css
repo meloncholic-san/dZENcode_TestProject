@@ -1,0 +1,91 @@
+.message {
+  position: relative; 
+  border: 1px solid #e0e0e0;
+  padding: 12px;
+  margin: 10px 0;
+  background-color: #fafafa;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.message:hover {
+  background-color: #f0f0f0;
+}
+
+.replies {
+  margin-top: 10px;
+  padding-left: 20px;
+  border-left: 2px solid #dcdcdc;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.email {
+  font-style: italic;
+  color: #555;
+}
+
+.text {
+  margin-top: 5px;
+  white-space: pre-line;
+}
+
+.imagePreview {
+  max-width: 300px;
+  margin-top: 10px;
+  border-radius: 4px;
+}
+
+.fileLink {
+  display: inline-block;
+  margin-top: 10px;
+  color: #1a73e8;
+  text-decoration: underline;
+}
+
+.attachment {
+  margin-top: 8px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+
+
+.replyButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+.replyButton button {
+  background: transparent;
+  border: none;
+  color: #1a73e8;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.replyButton button:hover {
+  background-color: rgba(26, 115, 232, 0.1);
+}
+
+.replyForm {
+    padding: 40px 20px;
+}
