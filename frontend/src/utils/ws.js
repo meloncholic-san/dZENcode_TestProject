@@ -1,8 +1,13 @@
+
+const isProd = import.meta.env.PROD;
+
 let socket;
-
 export const connectWS = () => {
-  socket = new WebSocket('ws://localhost:8080');
+  const wsURL = isProd
+    ? "wss://dzencode-testproject.onrender.com"
+    : "ws://localhost:8080";
 
+  socket = new WebSocket(wsURL);
   socket.onopen = () => {
     console.log(' WebSocket connected');
   };
