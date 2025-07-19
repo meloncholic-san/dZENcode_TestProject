@@ -11,12 +11,16 @@ export default function MainPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    connectWS();
+  connectWS();
 
-    subscribeToMessages((newComment) => {
-      dispatch(addCommentFromWS(newComment));
-    });
-  }, [dispatch]);
+  const unsubscribe = subscribeToMessages((newComment) => {
+    dispatch(addCommentFromWS(newComment));
+  });
+
+  return () => {
+    unsubscribe();
+  };
+}, [dispatch]);
 
   return (
     <div className="container">
